@@ -12,6 +12,10 @@ export const AddItemForm = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        if (!title.trim() || !body.trim()) {
+            alert('Both title and body are required');
+            return;
+        }
         const maxId = Math.max(...items.map(item => item.id));
         const newId = maxId + 1;
         dispatch(addItem({ id: newId, title, body, userId: 1 }));
