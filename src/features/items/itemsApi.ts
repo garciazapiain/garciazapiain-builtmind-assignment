@@ -1,4 +1,3 @@
-// src/features/items/itemsApi.ts
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { api } from '../../api/axios';
 

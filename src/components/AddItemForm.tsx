@@ -1,4 +1,3 @@
-// src/features/items/AddItemForm.tsx
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectItems, addItem } from '../features/items/itemsSlice';
@@ -7,13 +6,17 @@ import { AppDispatch } from '../app/store';
 export const AddItemForm = () => {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
+    const [errorMessage, setErrorMessage] = useState("");
     const items = useSelector(selectItems);
     const dispatch = useDispatch<AppDispatch>(); // Type dispatch as AppDispatch
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (!title.trim() || !body.trim()) {
-            alert('Both title and body are required');
+            setErrorMessage("Title and body cannot be empty");
+            setTimeout(() => {
+                setErrorMessage("");
+            }, 4000);
             return;
         }
         const maxId = Math.max(...items.map(item => item.id));
@@ -24,7 +27,7 @@ export const AddItemForm = () => {
     };
 
     return (
-        <div className="bg-gray-200 border border-gray-300 p-2 mb-2 rounded h-[40vh] sm:h-[50vh] sticky top-0">
+        <div className="bg-gray-200 border border-gray-300 p-2 mb-2 rounded h-[45vh] sticky top-0">
             <h2 className="text-black text-l font-bold mb-2">Add Post</h2>
             <form onSubmit={handleSubmit} className="flex flex-col">
                 <label htmlFor="title" className="mb-2 text-black">
@@ -49,6 +52,7 @@ export const AddItemForm = () => {
                 <button type="submit" className="bg-green-500 text-white rounded p-2 mt-2">
                     Add
                 </button>
+                {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
             </form>
         </div>
     );

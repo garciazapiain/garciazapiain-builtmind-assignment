@@ -1,4 +1,3 @@
-// src/features/items/ListItem.tsx
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateItem, deleteItem } from '../features/items/itemsSlice';
@@ -47,7 +46,7 @@ export const ListItem: React.FC<ListItemProps> = ({ id, userId, title, body }) =
                     <textarea value={newBody} onChange={(e) => setNewBody(e.target.value)} className="mb-2 w-full rounded border border-gray-300 p-2 text-black" />
                     <button onClick={handleSave} className="bg-blue-500 text-white rounded p-2">Save</button>
                     <button onClick={handleCancel} className="bg-red-500 text-white rounded p-2 ml-2">Cancel</button>
-                    {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+                    {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
                 </form>
             ) : (
                 <div>
